@@ -913,6 +913,7 @@ class LlamaModel(LlamaPreTrainedModel):
         dtype, device = input_tensor.dtype, input_tensor.device
         min_dtype = torch.finfo(dtype).min
         sequence_length = input_tensor.shape[1]
+        using_static_cache = False
         if using_static_cache:
             target_length = past_key_values.get_max_length()
         else:
