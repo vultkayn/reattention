@@ -122,7 +122,7 @@ for abbr, group, model_type, prompt_format, re_attn_config in tags:
                                   use_fast=False, trust_remote_code=True), 
             max_out_len=32,
             batch_size=1, 
-            model_kwargs=dict(device_map='auto', torch_dtype=torch.bfloat16, trust_remote_code=True),
+            model_kwargs=dict(device_map='auto', dtype='auto', trust_remote_code=True),
             re_attn_config=re_attn_config,
             prompt_format=prompt_format, 
             batch_padding=False, # if false, inference with for-loop without batch padding

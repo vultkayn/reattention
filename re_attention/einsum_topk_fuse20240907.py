@@ -179,7 +179,7 @@ def einsum_topk_func(q: torch.Tensor, k: torch.Tensor, topk: int) -> torch.Tenso
     assert q.stride(-1) == 1 and k.stride(-1) == 1
     assert num_heads % num_heads_k == 0, "num_heads must be divisible by num_heads_k"
     assert d == dk and batch_k == batch, f"batch & head dimensions must match, but find q.shape={q.shape} and k.shape={k.shape}"
-    assert q.dtype == k.dtype and q.dtype in [torch.float16, torch.bfloat16], "All tensors must have the same type. Only support fp16 and bf16"
+    assert q.dtype == k.dtype and q.dtype in ['auto', 'auto'], "All tensors must have the same type. Only support fp16 and bf16"
     assert q.is_cuda and k.is_cuda, "All tensors must be sent to gpu"
     assert d == 128 and seqlen_q % 128 == 0 and seqlen_k % 128 == 0, f"Only support d == 128 && seqlen_q % 128 == 0 && seqlen_k % 256 == 0, but find d={d}, seqlen_q={seqlen_q}, seqlen_k={seqlen_k}"
     # assert d in [64, 128] and seqlen_q % 128 == 0 and seqlen_k % 128 == 0, f"Only support d == 128 && seqlen_q % 128 == 0 && seqlen_k % 256 == 0, but find d={d}, seqlen_q={seqlen_q}, seqlen_k={seqlen_k}"
@@ -240,7 +240,7 @@ def einsum_topk_func(q: torch.Tensor, k: torch.Tensor, topk: int) -> torch.Tenso
 #     assert q.stride(-1) == 1 and k.stride(-1) == 1
 #     assert num_heads % num_heads_k == 0, "num_heads must be divisible by num_heads_k"
 #     assert d == dk and batch_k == batch, "batch & head dimensions must match"
-#     assert q.dtype == k.dtype and q.dtype in [torch.float16, torch.bfloat16], "All tensors must have the same type. Only support fp16 and bf16"
+#     assert q.dtype == k.dtype and q.dtype in ['auto', 'auto'], "All tensors must have the same type. Only support fp16 and bf16"
 #     assert q.is_cuda and k.is_cuda, "All tensors must be sent to gpu"
 #     assert d == 128 and seqlen_q % 128 == 0 and seqlen_k % 128 == 0, "Only support d == 128 && seqlen_q % 128 == 0 && seqlen_k % 256 == 0"
 #     assert topk == 4, "Only support k == 1"

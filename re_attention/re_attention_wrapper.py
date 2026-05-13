@@ -154,8 +154,8 @@ class ReAttentionCausalLM(HuggingFaceCausalLM):
             self.config.rope_scaling = self.re_attn_config.rope_scaling
             print('self.config.rope_scaling', self.config.rope_scaling, flush=True)
             self.config.pretraining_tp = 1
-            self._set_model_kwargs_torch_dtype(model_kwargs)
-            self.model = LlamaForCausalLM.from_pretrained(path, torch_dtype=torch.float16,  # device_map="auto",  # device,  # **model_kwargs,
+            self._set_model_kwargs_dtype(model_kwargs)
+            self.model = LlamaForCausalLM.from_pretrained(path, dtype='auto',  # device_map="auto",  # device,  # **model_kwargs,
                                                           config=self.config, trust_remote_code=True,  # local_files_only=True, 
                                                           attn_implementation=self.attn_implementation).cuda()
         elif model_type == 'llama+':
@@ -168,8 +168,8 @@ class ReAttentionCausalLM(HuggingFaceCausalLM):
             self.config.re_attn_config = self.re_attn_config
             print('self.config.rope_scaling', self.config.rope_scaling, flush=True)
             self.config.pretraining_tp = 1
-            self._set_model_kwargs_torch_dtype(model_kwargs)
-            self.model = LlamaForCausalLM.from_pretrained(path, torch_dtype=torch.float16,  # device_map="auto",  # name_dict,  # device,  # **model_kwargs,
+            self._set_model_kwargs_dtype(model_kwargs)
+            self.model = LlamaForCausalLM.from_pretrained(path, dtype='auto',  # device_map="auto",  # name_dict,  # device,  # **model_kwargs,
                                                           config=self.config, trust_remote_code=True,  # local_files_only=True, 
                                                           attn_implementation=self.attn_implementation).cuda()
 
@@ -183,8 +183,8 @@ class ReAttentionCausalLM(HuggingFaceCausalLM):
             self.config.rope_scaling = self.re_attn_config.rope_scaling
             print('self.config.rope_scaling', self.config.rope_scaling, flush=True)
             self.config.pretraining_tp = 1
-            self._set_model_kwargs_torch_dtype(model_kwargs)            
-            self.model = InternLM2ForCausalLM.from_pretrained(path, torch_dtype=torch.float16,  # device_map="auto",  # device,  # **model_kwargs,
+            self._set_model_kwargs_dtype(model_kwargs)            
+            self.model = InternLM2ForCausalLM.from_pretrained(path, dtype='auto',  # device_map="auto",  # device,  # **model_kwargs,
                                                               config=self.config, trust_remote_code=True,  # local_files_only=True, 
                                                               attn_implementation=self.attn_implementation).cuda()
             
@@ -198,8 +198,8 @@ class ReAttentionCausalLM(HuggingFaceCausalLM):
             self.config.rope_scaling = self.re_attn_config.rope_scaling
             print('self.config.rope_scaling', self.config.rope_scaling, flush=True)
             self.config.pretraining_tp = 1
-            self._set_model_kwargs_torch_dtype(model_kwargs)
-            self.model = Qwen2ForCausalLM.from_pretrained(path, torch_dtype=torch.float16,  # device_map="auto",  # device,  # **model_kwargs,
+            self._set_model_kwargs_dtype(model_kwargs)
+            self.model = Qwen2ForCausalLM.from_pretrained(path, dtype='auto',  # device_map="auto",  # device,  # **model_kwargs,
                                                           config=self.config, trust_remote_code=True,  # local_files_only=True, 
                                                           attn_implementation=self.attn_implementation).cuda()
 
@@ -213,8 +213,8 @@ class ReAttentionCausalLM(HuggingFaceCausalLM):
             self.config.rope_scaling = self.re_attn_config.rope_scaling
             print('self.config.rope_scaling', self.config.rope_scaling, flush=True)
             self.config.pretraining_tp = 1
-            self._set_model_kwargs_torch_dtype(model_kwargs)
-            self.model = MistralForCausalLM.from_pretrained(path, torch_dtype=torch.float16,  # device_map="auto",  # device,  # **model_kwargs,
+            self._set_model_kwargs_dtype(model_kwargs)
+            self.model = MistralForCausalLM.from_pretrained(path, dtype='auto',  # device_map="auto",  # device,  # **model_kwargs,
                                                           config=self.config, trust_remote_code=True,  # local_files_only=True, 
                                                           attn_implementation=self.attn_implementation).cuda()
 
@@ -230,7 +230,7 @@ class ReAttentionCausalLM(HuggingFaceCausalLM):
             self.config._flash_attn_2_enabled = True
             self.config.attn_implementation = "flash_attention_2"
             self.config._attn_implementation = "flash_attention_2"
-            self._set_model_kwargs_torch_dtype(model_kwargs)
+            self._set_model_kwargs_dtype(model_kwargs)
             self.model = AutoModelForCausalLM.from_pretrained(path, **model_kwargs, config=self.config)
         
         if peft_path is not None:

@@ -296,7 +296,7 @@ for abbr, group, model_type, prompt_format, long_bench_cat, re_attn_config in ta
                                   use_fast=False, trust_remote_code=True), 
             max_out_len=500,
             batch_size=1, 
-            model_kwargs=dict(device_map='auto', torch_dtype=torch.bfloat16, trust_remote_code=True),
+            model_kwargs=dict(device_map='auto', dtype='auto', trust_remote_code=True),
             re_attn_config=re_attn_config,
             long_bench_cat=long_bench_cat,
             prompt_format=prompt_format, 
